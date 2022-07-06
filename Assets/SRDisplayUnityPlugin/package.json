@@ -1,0 +1,7 @@
+{
+  "name": "jp.co.sony.srd",
+  "displayName": "SRDisplay Unity Plugin (URP)",
+  "version": "1.2.0",
+  "unity": "2019.4",
+  "description": "Plugin for Spatial Reality Display (URP)"
+}

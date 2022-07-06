@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: a31139ee51addf748ad4dad2e9aa943a
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Brilliant Cut
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b126db43f49bcf345992dc6ad3b64bb1, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
