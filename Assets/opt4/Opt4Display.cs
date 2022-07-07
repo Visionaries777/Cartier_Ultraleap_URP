@@ -177,7 +177,7 @@ public class Opt4Display : MonoBehaviour
             Destroy(currentPreview);
         if (options[current].nextPage != null)
         {
-            currentPreview = Instantiate(options[current].preview,previewPos.position,Quaternion.Euler(45,0,0),previewPos);
+            currentPreview = Instantiate(options[current].preview,previewPos.position,Quaternion.identity,previewPos);
         }
 
     }
@@ -193,9 +193,6 @@ public class Opt4Display : MonoBehaviour
                 if (op.nextPage != null)
                 {
                     GameObject next = op.nextPage;
-                    next.transform.position = new Vector3(next.transform.position.x+1, next.transform.position.y, next.transform.position.z);
-                    next.GetComponent<HorizontalControl>().enabled = false;
-                    next.SetActive(true);
                     next.GetComponent<HorizontalControl>().lastPage = this.gameObject;
                     animation = StartCoroutine("FadeLeft");
                     this.enabled = false;
@@ -223,6 +220,7 @@ public class Opt4Display : MonoBehaviour
     IEnumerator FadeLeft()
     {
         var a = Instantiate(options[current].display, options[current].display.transform.position,Quaternion.identity);
+        var b = Instantiate(currentPreview, currentPreview.transform.position,Quaternion.identity);
         previewPos.gameObject.SetActive(false);
         options[current].display.SetActive(false);
         GameObject next = options[current].nextPage;
@@ -231,22 +229,23 @@ public class Opt4Display : MonoBehaviour
         {
             float v = 1 - main.transitonCurve.Evaluate(t);
             a.transform.position += new Vector3(main.transitionDistance * (v)*Time.deltaTime , 0, 0);
-            if (next.transform.position.x > 0)
+            if (b.transform.position.x > 0)
             {
-                next.transform.position = next.transform.position + new Vector3(-1f*Time.deltaTime,0, 0);
+                b.transform.position = b.transform.position + new Vector3(-1f*Time.deltaTime,0, 0);
             }
-            if (bgColor.r > 0.25)
-            {
-                c = new Color(c.r - 0.05f, c.g - 0.05f, c.b - 0.05f, c.a);
-                bg.SetColor("_Tint", c);
-                RenderSettings.skybox = bg;
-            }
+            //if (bgColor.r > 0.25)
+            //{
+            //    c = new Color(c.r - 0.05f, c.g - 0.05f, c.b - 0.05f, c.a);
+            //    bg.SetColor("_Tint", c);
+            //    RenderSettings.skybox = bg;
+            //}
             yield return null;
         }
         this.enabled = true;
-        next.GetComponent<HorizontalControl>().enabled = true;
+        next.SetActive(true);
         previewPos.gameObject.SetActive(true);
         Destroy(a);
+        Destroy(b);
         this.gameObject.SetActive(false);
         options[current].display.SetActive(true);
         animation = null;
