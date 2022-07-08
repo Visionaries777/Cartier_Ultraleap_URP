@@ -36,7 +36,6 @@ public class TimeLineTest : MonoBehaviour
             p = new Vector3(p.x, p.y + grid, p.z);
 
         }
-        pos.rotation = Quaternion.Euler(45,0,0);
         fontSize = _obj[0].fontSize;
     }
 

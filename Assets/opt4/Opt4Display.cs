@@ -19,13 +19,13 @@ public class Opt4Display : MonoBehaviour
         [System.NonSerialized]
         public Vector3 displayCache;
         public GameObject preview;
+        public Transform previewPos;
         public string year;
         public GameObject bg;
         public Goal goal;
         public GameObject nextPage;
     }
     public Option[] options;
-    public Transform previewPos;
     [Range(0f,1f)]
     public float alpha;
     public float waitTime;
@@ -76,13 +76,17 @@ public class Opt4Display : MonoBehaviour
         OutsideControl();
         lastPinching = LeapPull.pinching;
         lastPinchDelta = LeapPull.GetPinchDelta();
-        if (last != current)
+
+        if (animation == null)
         {
-            UpdatePreview();
-            last = current;
-        }
-        if(animation==null)
             UpdateTransform();
+            if (last != current)
+            {
+                UpdatePreview();
+                last = current;
+            }
+        }
+
         //options[current].bg.color = color;
 
     }
@@ -112,11 +116,14 @@ public class Opt4Display : MonoBehaviour
         }
         else
         {
+            if (options[current].nextPage != null)
+            {
+                c += Time.deltaTime;
+                loadingDot.fillAmount += 1 / waitTime * Time.deltaTime;
+                if (c >= waitTime)
+                    OnEnter();
+            }
 
-            c += Time.deltaTime;
-            loadingDot.fillAmount += 1 / waitTime * Time.deltaTime;
-            if (c >= waitTime)
-                OnEnter();
 
         }
     }
@@ -177,7 +184,8 @@ public class Opt4Display : MonoBehaviour
             Destroy(currentPreview);
         if (options[current].nextPage != null)
         {
-            currentPreview = Instantiate(options[current].preview,previewPos.position,Quaternion.identity,previewPos);
+            currentPreview = Instantiate(options[current].preview,options[current].previewPos.position,Quaternion.identity,this.transform);
+            Debug.Log("hehe");
         }
 
     }
@@ -221,7 +229,7 @@ public class Opt4Display : MonoBehaviour
     {
         var a = Instantiate(options[current].display, options[current].display.transform.position,Quaternion.identity);
         var b = Instantiate(currentPreview, currentPreview.transform.position,Quaternion.identity);
-        previewPos.gameObject.SetActive(false);
+        currentPreview.SetActive(false);
         options[current].display.SetActive(false);
         GameObject next = options[current].nextPage;
         var c = bgColor;
@@ -241,12 +249,12 @@ public class Opt4Display : MonoBehaviour
             //}
             yield return null;
         }
-        this.enabled = true;
-        next.SetActive(true);
-        previewPos.gameObject.SetActive(true);
         Destroy(a);
         Destroy(b);
+        this.enabled = true;
+        next.SetActive(true);
         this.gameObject.SetActive(false);
+        currentPreview.SetActive(true);
         options[current].display.SetActive(true);
         animation = null;
     }
