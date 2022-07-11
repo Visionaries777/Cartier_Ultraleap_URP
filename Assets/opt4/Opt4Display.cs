@@ -19,13 +19,13 @@ public class Opt4Display : MonoBehaviour
         [System.NonSerialized]
         public Vector3 displayCache;
         public GameObject preview;
-        public Transform previewPos;
         public string year;
         public GameObject bg;
         public Goal goal;
         public GameObject nextPage;
     }
     public Option[] options;
+    public Transform previewPos;
     [Range(0f,1f)]
     public float alpha;
     public float waitTime;
@@ -184,7 +184,7 @@ public class Opt4Display : MonoBehaviour
             Destroy(currentPreview);
         if (options[current].nextPage != null)
         {
-            currentPreview = Instantiate(options[current].preview,options[current].previewPos.position,Quaternion.identity,this.transform);
+            currentPreview = Instantiate(options[current].preview,previewPos.position,Quaternion.identity,this.transform);
             Debug.Log("hehe");
         }
 

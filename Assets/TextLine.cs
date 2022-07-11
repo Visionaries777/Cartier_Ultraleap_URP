@@ -39,19 +39,20 @@ public class TextLine : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            textUI.text = "";
-            for (int i = 0; i < lines.Length; i++)
-            {
-                if(_lines[i] != null)
-                    DestroyImmediate(_lines[i]);
-                var l = Instantiate(font, Vector3.zero, Quaternion.identity, pos);
-                l.transform.localPosition = new Vector3(0, 0, 0);
-                l.text = lines[i];
-                l.color = new Color(l.color.r, l.color.g, l.color.b, 0);
-                l.transform.localPosition = new Vector3(0, -lineSpace * i - dropDownOffset - dropDownRange*i, 0);
-                _lines[i] = l;
-            }
-            StartCoroutine("TextAnimation");
+                textUI.text = "";
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (_lines[i] != null)
+                        DestroyImmediate(_lines[i].gameObject);
+                    var l = Instantiate(font, Vector3.zero, Quaternion.identity, pos);
+                    l.transform.localPosition = new Vector3(0, 0, 0);
+                    l.text = lines[i];
+                    l.color = new Color(l.color.r, l.color.g, l.color.b, 0);
+                    l.transform.localPosition = new Vector3(0, -lineSpace * i - dropDownOffset - dropDownRange * i, 0);
+                    _lines[i] = l;
+                }
+                StartCoroutine("TextAnimation");
+
         }
 
     }
