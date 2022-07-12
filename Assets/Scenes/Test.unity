@@ -1158,7 +1158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leap: {fileID: 618220844}
   pinchTest: 0
-  pullPushDistance: 0.05
+  pullPushDistance: 0.08
   detectDistance: 5
   pinchStrengthPrecision: 0.85
   xWeight: 0.7
@@ -1186,8 +1186,8 @@ MonoBehaviour:
   selectedForward: 0.1
   moveDamping: 0.6
   pinchMultiply: 8
-  transitionTime: 1
-  watchHeight: 0.05
+  transitionTime: 0.5
+  watchHeight: 0
   transitionDistance: -3
   transitonCurve:
     serializedVersion: 2
@@ -1372,19 +1372,19 @@ MonoBehaviour:
     goal: 0
     nextPage: {fileID: 0}
   - display: {fileID: 302825019}
-    preview: {fileID: 2170257399675073962, guid: a6a284b060b2a3a4dadd824083448880, type: 3}
+    preview: {fileID: 961828251799376655, guid: a6a284b060b2a3a4dadd824083448880, type: 3}
     year: 1898
     bg: {fileID: 2013399020}
     goal: 0
     nextPage: {fileID: 1289174084}
   - display: {fileID: 424586323}
-    preview: {fileID: 3411373940908848318, guid: 54a851e760282f44ab120c73562e8580, type: 3}
+    preview: {fileID: 5809395642948205417, guid: 54a851e760282f44ab120c73562e8580, type: 3}
     year: 1856
     bg: {fileID: 16996275}
     goal: 0
     nextPage: {fileID: 1357391456}
   - display: {fileID: 1217668929}
-    preview: {fileID: 3516724179073023700, guid: cf6bfc1296748e6439b9947bb267498e, type: 3}
+    preview: {fileID: 5886760872599099340, guid: cf6bfc1296748e6439b9947bb267498e, type: 3}
     year: 1847
     bg: {fileID: 395258769}
     goal: 0
