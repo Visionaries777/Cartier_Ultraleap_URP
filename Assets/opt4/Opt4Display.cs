@@ -37,7 +37,7 @@ public class Opt4Display : MonoBehaviour
     public float size;
     private Color32 color;
     public int current = 0;
-    private float focus = 0;
+    public float focus = 0;
     public float c=0;
     public Color bgColor;
     public Material bg;
@@ -112,6 +112,7 @@ public class Opt4Display : MonoBehaviour
             else
             {
                 speed = 0;
+                focus = Mathf.Lerp(focus, current, main.moveDamping);
             }
         }
         else
@@ -124,7 +125,7 @@ public class Opt4Display : MonoBehaviour
                     OnEnter();
             }
 
-
+            focus = Mathf.Lerp(focus, current, main.moveDamping);
         }
     }
 
@@ -134,7 +135,7 @@ public class Opt4Display : MonoBehaviour
         for (int i = 0; i < options.Length; i++)
         {
             Option option = options[i];
-            option.display.transform.position = main.transform.TransformPoint(option.displayCache + new Vector3(0, main.watchHeight, (i - focus) * main.gridWidth * main.pinchMultiply));
+            option.display.transform.position = main.transform.TransformPoint(option.displayCache + new Vector3(0, 0, (i - focus) * main.gridWidth * main.pinchMultiply));
             option.display.SetActive(true);
 
         }

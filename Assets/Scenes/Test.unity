@@ -1399,6 +1399,7 @@ MonoBehaviour:
   speed: 0
   size: 10
   current: 0
+  focus: 0
   c: 0
   bgColor: {r: 1, g: 1, b: 1, a: 1}
   bg: {fileID: 2100000, guid: a91d801c3bb029d47952040b5d8f873e, type: 2}
