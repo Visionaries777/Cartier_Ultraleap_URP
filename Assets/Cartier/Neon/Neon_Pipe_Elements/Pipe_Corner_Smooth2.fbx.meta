@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a280dd83583469b499a4be38ad7099ff
+guid: 0aad17d408dadf04dab591058146f4a7
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
@@ -9,11 +9,6 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: gold
     second: {fileID: 2100000, guid: f11085574ae9f0042a8f59b867a4328b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: led
-    second: {fileID: 2100000, guid: 5ae580c581330994aacaecd3312e6290, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
