@@ -1077,7 +1077,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 166326, guid: b9c7aaf0d314cb847a3b2a20e893f1b6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 432918, guid: b9c7aaf0d314cb847a3b2a20e893f1b6, type: 3}
       propertyPath: m_RootOrder
@@ -1359,6 +1359,8 @@ MonoBehaviour:
   pullPushDistance: 0.08
   detectDistance: 5
   pinchStrengthPrecision: 0.85
+  deltaVelocity: 0.7
+  handDiretion: 2
   xWeight: 0.7
   doubleClickTIme: 0.8
   pullMode: 0

@@ -29,6 +29,16 @@ public class LeapPull : MonoBehaviour
     public float pullPushDistance = 0.5f;
     public float detectDistance = 2f;
     public float pinchStrengthPrecision = 0.75f;
+    public float deltaVelocity = 0.7f;
+
+    public enum HandDiretion
+    {
+        left,
+        right,
+        none
+    }
+    public HandDiretion handDiretion = HandDiretion.none;
+
     public enum PinchPhase
     {
         None,
@@ -67,6 +77,9 @@ public class LeapPull : MonoBehaviour
         return pinchStartPosition - pinchPosition;
     }
 
+    float shake = 0;
+    public float smallestVelocity = 1.45f;
+
     void Update()
     {
         bool currentPinch = false;
@@ -78,6 +91,7 @@ public class LeapPull : MonoBehaviour
             {
                 wristPosition = hand.WristPosition.ToVector3();
                 handRotation = hand.Rotation.ToQuaternion();
+
                 Vector3 testPos = hand.PalmPosition.ToVector3();
                 testPos.x = 0;
                 if (testPos.magnitude > detectDistance)
@@ -98,11 +112,22 @@ public class LeapPull : MonoBehaviour
                             pinchStartTme = Time.time;
                         }
                     }
+
+                    if (IsMoveRight(hand))
+                    {
+                            handDiretion = HandDiretion.right;
+                    }
+
+                    if (IsMoveLeft(hand))
+                    {
+                            handDiretion = HandDiretion.left;
+                    }
+                    if (IsStationary(hand))
+                    {
+                        handDiretion = HandDiretion.none;
+                    }
                 }
-                if (isCloseHand(hand))
-                {
-                    closeing=true;
-                }
+
 
             }
         }
@@ -264,20 +289,21 @@ public class LeapPull : MonoBehaviour
         pinchTest = pinching;
     }
 
-    bool isCloseHand(Hand hand)
+    protected bool IsMoveLeft(Hand hand)
     {
-        List<Finger> listOfFingers = hand.Fingers;
-        int count = 0;
-        for (int f = 0; f < listOfFingers.Count; f++)
-        {
-            Finger finger = listOfFingers[f];
-            if ((finger.TipPosition - hand.PalmPosition).Magnitude < 0.05f*leap.gameObject.transform.localScale.x)
-            {
-                count++;
-            }
-        }
-        return (count == 4);
+        return hand.PalmVelocity.x < -deltaVelocity && !IsStationary(hand);
     }
+
+    protected bool IsMoveRight(Hand hand)
+    {
+        return hand.PalmVelocity.x > deltaVelocity && !IsStationary(hand);
+    }
+
+    protected bool IsStationary(Hand hand)
+    {
+        return hand.PalmVelocity.Magnitude < smallestVelocity;
+    }
+
 
     private void OnDrawGizmos()
     {
